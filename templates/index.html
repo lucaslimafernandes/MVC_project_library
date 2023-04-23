@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    {% block head %}
+        <title>Index</title>
+    {% endblock %}
+    {% block body %}
+        <h1>Bem -vindo</h1>
+        <h2>Listagem de usuários</h2>
+        {% if not users %}
+            <p>Ninguém cadastrado!</p>
+        {% else %}
+            <table class="pure-table">
+                <tr class="pure-table th">
+                    <th class="pure-table th">_id: </th>
+                    <th class="pure-table th">Nome: </th>
+                    <th class="pure-table th">Id: </th>
+                    <th class="pure-table th">Address: </th>
+                    <th class="pure-table th">Phone Number: </th>
+                    <th class="pure-table th">e-mail: </th>
+                    <th class="pure-table th">Job: </th>
+                    <th class="pure-table th">Date of Birth: </th>
+                    <th class="pure-table th">Registration date: </th>
+                    <th class="pure-table th">Status: </th>
+                    <th class="pure-table th">Debtor: </th>
+                    <th class="pure-table th">Number of books: </th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td class="pure-table td">{{ user._id }}</td>
+                    <td class="pure-table td">{{ user.name }}</td>
+                    <td class="pure-table td">{{ user.iana_id }}</td>
+                    <td class="pure-table td">{{ user.address }}</td>
+                    <td class="pure-table td">{{ user.phone_number }}</td>
+                    <td class="pure-table td">{{ user.email }}</td>
+                    <td class="pure-table td">{{ user.job }}</td>
+                    <td class="pure-table td">{{ user.date }}</td>
+                    <td class="pure-table td">{{ user.date_in }}</td>
+                    <td class="pure-table td">{{ user.status }}</td>
+                    <td class="pure-table td">{{ user.debtor }}</td>
+                    <td class="pure-table td">{{ user.status }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </table>
+    {% endblock %}

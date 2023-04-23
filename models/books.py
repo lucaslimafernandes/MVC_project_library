@@ -1,9 +1,10 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import settings
+from . import settings
+#import settings
 import datetime
 
-from users import User
+from .users import User
 
 client = MongoClient(settings.mongo_st)
 
@@ -17,6 +18,7 @@ db = client.MVC_FM
 
 
 #https://www.saraiva.com.br/a-arte-da-guerra----os-treze-capitulos-originais/p
+#644597ff42a587b4e0cf1039
 #Ano da Edição
 #2008
 #Autor
@@ -67,20 +69,22 @@ class Books:
     @staticmethod
     def show_book(obj_id):
 
-        #obj_id = ObjectId('644486b973018a1d84eb1437')
+        #obj_id = ObjectId('644597ff42a587b4e0cf1039')
         obj_id = ObjectId(obj_id)
         
-        users = db.books
-        user = users.find({'_id': obj_id})
+        books = db.books
+        book = books.find({'_id': obj_id})
 
-        return user
+        return book
+    
+        #FAZER A CHAMADO BOOK AQUI
 
 
     @staticmethod
     def show_all_books():
 
-        users = db.books
-        lista = users.find()
+        books = db.books
+        lista = books.find()
 
         return lista
 
@@ -89,10 +93,27 @@ class Loan:
 
     def __init__(self, book, person) -> None:
         self.book = book
-        self.person = person
+        #self.person = person
 
+        user = User.show_user(person)
+        print(user)
+        print(user[0])
+        user = User(**user[0]).parser()
+
+        user_books = user['books']
+
+        print(user_books)
 
 
     
     def emprestimo(self):
         pass
+
+
+if __name__ == '__main__':
+
+    book = '644597ff42a587b4e0cf1039'
+    user = '64459bbe39e1ed3c40dfae7f'
+
+    a = Loan(book, user)
+    

@@ -1,7 +1,8 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import settings
+#import settings
 import datetime
+from . import settings
 
 client = MongoClient(settings.mongo_st)
 
@@ -15,7 +16,7 @@ db = client.MVC_FM
 
 class User:
 
-    def __init__(self, name, iana_id, address, phone_number, email, job, date) -> None:
+    def __init__(self, name, iana_id, address, phone_number, email, job, date, _id=None, date_in=None, status=None, debtor=None, books=None) -> None:
         
         self.name = name
         self.iana_id = iana_id
@@ -26,7 +27,7 @@ class User:
         self.date = date
         self.date_in = datetime.datetime.now()
         self.status = True
-        self.devedor = False
+        self.debtor = False
         self.books = []
     
 
@@ -42,7 +43,7 @@ class User:
             'date'          :self.date ,
             'date_in'       :self.date_in ,
             'status'        :self.status ,
-            'devedor'       :self.devedor ,
+            'debtor'        :self.debtor ,
             'books'         :self.books
         }
 
@@ -100,5 +101,11 @@ class User:
         books_u = user[0]['books']
 
         return [user, books_u]
+    
+    @staticmethod
+    def delete():
+
+        users = db.users
+        dele = users.drop()
 
 
