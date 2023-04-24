@@ -3,13 +3,18 @@
         <title>Index</title>
     {% endblock %}
     {% block body %}
-        <h1>Bem -vindo</h1>
-        <h2>Listagem de usuários</h2>
+        <h1>Bem-vindo a Biblioteca Pública</h1>
+        <p>
+            Abaixo, possuímos a listagem de usuários e os livros lidos por cada uma. 
+        </p>
+        <h2>Listagem de Usuários</h2>
+        <button><a href="/new_user/">Novo usuário</a></button>
         {% if not users %}
             <p>Ninguém cadastrado!</p>
         {% else %}
             <table class="pure-table">
                 <tr class="pure-table th">
+                    <th class="pure-table th">Nova leitura: </th>
                     <th class="pure-table th">_id: </th>
                     <th class="pure-table th">Nome: </th>
                     <th class="pure-table th">Id: </th>
@@ -24,21 +29,52 @@
                     <th class="pure-table th">Number of books: </th>
                 </tr>
                 {% for user in users %}
-                <tr>
-                    <td class="pure-table td">{{ user._id }}</td>
-                    <td class="pure-table td">{{ user.name }}</td>
-                    <td class="pure-table td">{{ user.iana_id }}</td>
-                    <td class="pure-table td">{{ user.address }}</td>
-                    <td class="pure-table td">{{ user.phone_number }}</td>
-                    <td class="pure-table td">{{ user.email }}</td>
-                    <td class="pure-table td">{{ user.job }}</td>
-                    <td class="pure-table td">{{ user.date }}</td>
-                    <td class="pure-table td">{{ user.date_in }}</td>
-                    <td class="pure-table td">{{ user.status }}</td>
-                    <td class="pure-table td">{{ user.debtor }}</td>
-                    <td class="pure-table td">{{ user.status }}</td>
-                </tr>
+                    <tr>
+                        <td class="pure-table td"><button><a href="/user/new_read/{{ user._id}}">Nova leitura</a></button></td>
+                        <td class="pure-table td">{{ user._id }}</td>
+                        <td class="pure-table td">{{ user.name }}</td>
+                        <td class="pure-table td">{{ user.iana_id }}</td>
+                        <td class="pure-table td">{{ user.address }}</td>
+                        <td class="pure-table td">{{ user.phone_number }}</td>
+                        <td class="pure-table td">{{ user.email }}</td>
+                        <td class="pure-table td">{{ user.job }}</td>
+                        <td class="pure-table td">{{ user.date }}</td>
+                        <td class="pure-table td">{{ user.date_in }}</td>
+                        <td class="pure-table td">{{ user.status }}</td>
+                        <td class="pure-table td">{{ user.debtor }}</td>
+                        <td class="pure-table td">{{ user.books|count }}</td>
+                    </tr>
                 {% endfor %}
-            {% endif %}
+        {% endif %}
             </table>
+            <h2>Listagem de Livros</h2>
+            <button><a href="/new_book/">Novo livro</a></button>
+            {% if not books %}
+                <p>Nenhum livro disponível!</p>
+            {% else %}
+                <table class="pure-table">
+                    <tr class="pure-table th">
+                        <th class="pure-table th">Nova leitura: </th>
+                        <th class="pure-table th">_id: </th>
+                        <th class="pure-table th">Nome: </th>
+                        <th class="pure-table th">Author: </th>
+                        <th class="pure-table th">Editora: </th>
+                        <th class="pure-table th">Idioma: </th>
+                        <th class="pure-table th">ISBN: </th>
+                        <th class="pure-table th">Ano: </th>
+                    </tr>
+                    {% for book in books %}
+                    <tr>
+                        <td class="pure-table td"><button><a class="" href="/book/new_read/{{ book._id}}">Nova leitura</a></button></td>
+                        <td class="pure-table td">{{ book._id }}</td>
+                        <td class="pure-table td">{{ book.book }}</td>
+                        <td class="pure-table td">{{ book.author }}</td>
+                        <td class="pure-table td">{{ book.publishing }}</td>
+                        <td class="pure-table td">{{ book.idiom }}</td>
+                        <td class="pure-table td">{{ book.isbn }}</td>
+                        <td class="pure-table td">{{ book.year }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </table>   
     {% endblock %}

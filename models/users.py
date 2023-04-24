@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from bson.son import SON
 #import settings
 import datetime
 from . import settings
@@ -29,6 +30,7 @@ class User:
         self.status = True
         self.debtor = False
         self.books = []
+        self._id = _id
     
 
     def parser(self):
@@ -58,6 +60,19 @@ class User:
         print(new_user)
     
 
+    def insert_books_read(self, new_values):
+        
+        users = db.users
+        #self.new_values = new_values
+        #newvalues = { "$set": { 'company': "sony" } }
+        
+        users.update_one({'_id':self._id}, {"$push": {'books': new_values}}).upserted_id
+
+
+
+
+
+
     @staticmethod
     def show_user(obj_id):
 
@@ -65,7 +80,7 @@ class User:
         obj_id = ObjectId(obj_id)
         
         users = db.users
-        user = users.find({'_id': obj_id})
+        user = users.find_one({'_id': obj_id})
 
         return user
 
@@ -79,31 +94,10 @@ class User:
 
         return lista
 
+
+
     @staticmethod
-    def add_book():
-
-        obj_id = ObjectId('6444956bac257d1f1f3291cd')
-        book_id = ObjectId('')
-
-        item = {
-            'book_id': book_id,
-            'date_in': datetime.datetime.now(),
-            'data_out': None
-        }
-        
-        users = db.users
-        user = users.find({'_id': obj_id})
-
-        books = db.books
-        book = books.find({'_id': book_id})
-
-
-        books_u = user[0]['books']
-
-        return [user, books_u]
-    
-    @staticmethod
-    def delete():
+    def delete_all_users():
 
         users = db.users
         dele = users.drop()

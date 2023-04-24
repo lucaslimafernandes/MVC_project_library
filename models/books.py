@@ -33,7 +33,7 @@ db = client.MVC_FM
 
 class Books:
 
-    def __init__(self, book, author, publishing, idiom, isbn, year) -> None:
+    def __init__(self, book, author, publishing, idiom, isbn, year, _id=None, available=None, loan=None) -> None:
         
         self.book = book
         self.author = author
@@ -69,17 +69,15 @@ class Books:
     @staticmethod
     def show_book(obj_id):
 
-        #obj_id = ObjectId('644597ff42a587b4e0cf1039')
         obj_id = ObjectId(obj_id)
         
         books = db.books
-        book = books.find({'_id': obj_id})
+        book = books.find_one({'_id': obj_id})
+
+
 
         return book
     
-        #FAZER A CHAMADO BOOK AQUI
-
-
     @staticmethod
     def show_all_books():
 
@@ -89,31 +87,31 @@ class Books:
         return lista
 
 
-class Loan:
+class Read:
 
-    def __init__(self, book, person) -> None:
-        self.book = book
-        #self.person = person
+    def __init__(self, book, user) -> None:
 
-        user = User.show_user(person)
-        print(user)
-        print(user[0])
-        user = User(**user[0]).parser()
-
-        user_books = user['books']
-
-        print(user_books)
-
+        self._user = User.show_user(user)
+        self._book = Books.show_book(book)
+        
+        self.loan()
 
     
-    def emprestimo(self):
-        pass
+    def loan(self):
+        
+        self.user = User(**self._user)
+        self.book = Books(**self._book)
+
+        parser_book = self.book.parser()
+
+        self.user.insert_books_read(parser_book)
+
 
 
 if __name__ == '__main__':
 
     book = '644597ff42a587b4e0cf1039'
-    user = '64459bbe39e1ed3c40dfae7f'
+    user = '6445bc180fd159ee2d74d9b4'
 
-    a = Loan(book, user)
+    a = Read(book, user)
     
