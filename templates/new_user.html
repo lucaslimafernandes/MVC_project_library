@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+    {% block head %}
+        <title>Biblioteca Pública - Novo Usuário</title>
+    {% endblock %}
+    {% block body %}
+        <h1>Biblioteca Pública - Novo Usuário</h1>
+        <form action="/users/new" method="post" class="pure-form">
+            <div>
+                <label for="name">Nome: </label>
+                <input type="text" name="name" id="">
+            </div>
+            <div>
+                <label for="iana_id">iana_id: </label>
+                <input type="text" name="iana_id" id="">
+            </div>
+            <div>
+                <label for="address">Address: </label>
+                <input type="text" name="address" id="">
+            </div>
+            <div>
+                <label for="phone_number">phone_number: </label>
+                <input type="tel" name="phone_number" id="">
+            </div>
+            <div>
+                <label for="email">email: </label>
+                <input type="email" name="email" id="">
+            </div>
+            <div>
+                <label for="job">job: </label>
+                <input type="text" name="job" id="">
+            </div>
+            <div>
+                <label for="date">Data de Nascimento: </label>
+                <input type="date" name="date" id="">
+            </div>
+            <div>
+                <button type="submit"> Cadastrar </button>
+            </div>
+        </form>   
+    {% endblock %}

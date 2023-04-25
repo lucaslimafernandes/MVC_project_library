@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+    {% block head %}
+        <title>Biblioteca Pública - Novo Livro</title>
+    {% endblock %}
+    {% block body %}
+        <h1>Biblioteca Pública - Novo Livro</h1>
+        <form action="/books/new" method="post" class="pure-form">
+            <div>
+                <label for="book">Nome do Livro: </label>
+                <input type="text" name="book" id="">
+            </div>
+            <div>
+                <label for="author">Autor: </label>
+                <input type="text" name="author" id="">
+            </div>
+            <div>
+                <label for="publishing">Editora: </label>
+                <input type="text" name="publishing" id="">
+            </div>
+            <div>
+                <label for="idiom">Idioma: </label>
+                <input type="text" name="idiom" id="">
+            </div>
+            <div>
+                <label for="isbn">ISBN: </label>
+                <input type="text" name="isbn" id="">
+            </div>
+            <div>
+                <label for="year">Ano: </label>
+                <input type="text" name="year" id="">
+            </div>
+            <div>
+                <label for="categoria">Categoria: </label>
+                <input type="text" name="categoria" id="">
+            </div>
+            <div>
+                <button type="submit"> Cadastrar </button>
+            </div>
+        </form>   
+    {% endblock %}

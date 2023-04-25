@@ -29,11 +29,13 @@ db = client.MVC_FM
 #Português
 #ISBN
 #978-85-60018-00-0
+#Categoria
+#Gestão de Liderança
 
 
 class Books:
 
-    def __init__(self, book, author, publishing, idiom, isbn, year, _id=None, available=None, loan=None) -> None:
+    def __init__(self, book, author, publishing, idiom, isbn, year, categoria, _id=None, available=None, loan=None) -> None:
         
         self.book = book
         self.author = author
@@ -41,6 +43,7 @@ class Books:
         self.idiom = idiom
         self.isbn = isbn
         self.year = year
+        self.categoria = categoria
         self.available = True
         self.loan = []
     
@@ -53,7 +56,8 @@ class Books:
             'publishing'    :self.publishing,
             'idiom'         :self.idiom,
             'isbn'          :self.isbn,
-            'year'          :self.year
+            'year'          :self.year,
+            'categoria'     :self.categoria
         }
 
         return dicio
@@ -85,6 +89,12 @@ class Books:
         lista = books.find()
 
         return lista
+
+    @staticmethod
+    def delete_all_books():
+
+        users = db.books
+        dele = users.drop()
 
 
 class Read:

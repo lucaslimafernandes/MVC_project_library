@@ -8,7 +8,7 @@
             Abaixo, possuímos a listagem de usuários e os livros lidos por cada uma. 
         </p>
         <h2>Listagem de Usuários</h2>
-        <button><a href="/new_user/">Novo usuário</a></button>
+        <button><a href="/users/new">Novo usuário</a></button>
         {% if not users %}
             <p>Ninguém cadastrado!</p>
         {% else %}
@@ -45,10 +45,10 @@
                         <td class="pure-table td">{{ user.books|count }}</td>
                     </tr>
                 {% endfor %}
-        {% endif %}
             </table>
+        {% endif %}
             <h2>Listagem de Livros</h2>
-            <button><a href="/new_book/">Novo livro</a></button>
+            <button><a href="/books/new">Novo livro</a></button>
             {% if not books %}
                 <p>Nenhum livro disponível!</p>
             {% else %}
@@ -62,6 +62,7 @@
                         <th class="pure-table th">Idioma: </th>
                         <th class="pure-table th">ISBN: </th>
                         <th class="pure-table th">Ano: </th>
+                        <th class="pure-table th">Categoria: </th>
                     </tr>
                     {% for book in books %}
                     <tr>
@@ -73,8 +74,9 @@
                         <td class="pure-table td">{{ book.idiom }}</td>
                         <td class="pure-table td">{{ book.isbn }}</td>
                         <td class="pure-table td">{{ book.year }}</td>
+                        <td class="pure-table td">{{ book.categoria }}</td>
                     </tr>
                     {% endfor %}
-                {% endif %}
                 </table>   
+                {% endif %}
     {% endblock %}

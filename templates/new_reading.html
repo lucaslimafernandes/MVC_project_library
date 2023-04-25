@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+    {% block head %}
+        <title>Biblioteca Pública - Novo Leitura</title>
+    {% endblock %}
+    {% block body %}
+        <h1>Biblioteca Pública - Nova Leitura</h1>
+           {% if template == 'USER' %}
+           <h2>Listagem de Livros</h2>
+            <button><a href="/books/new">Novo livro</a></button>
+                {% if not books %}
+                    <p>Nenhum livro disponível!</p>
+                {% else %}
+                <table class="pure-table">
+                    <tr class="pure-table th">
+                        <th class="pure-table th">Ler: </th>
+                        <th class="pure-table th">_id: </th>
+                        <th class="pure-table th">Nome: </th>
+                        <th class="pure-table th">Author: </th>
+                        <th class="pure-table th">Editora: </th>
+                        <th class="pure-table th">Idioma: </th>
+                        <th class="pure-table th">ISBN: </th>
+                        <th class="pure-table th">Ano: </th>
+                        <th class="pure-table th">Categoria: </th>
+                    </tr>
+                    {% for book in books %}
+                    <tr>
+                        <form action="/save_read" method="post">
+                            <td class="pure-table td"><button type="submit"> LER </button></td>
+                            <td class="pure-table td"><input type="hidden" name="book" value="{{ book._id }}">{{ book._id }}</td>
+                            <td class="pure-table td">{{ book.book }}</td>
+                            <td class="pure-table td">{{ book.author }}</td>
+                            <td class="pure-table td">{{ book.publishing }}</td>
+                            <td class="pure-table td">{{ book.idiom }}</td>
+                            <td class="pure-table td">{{ book.isbn }}</td>
+                            <td class="pure-table td">{{ book.year }}</td>
+                            <td class="pure-table td">{{ book.categoria }}</td>
+                            <input type="hidden" name="user" value="{{ user._id }}">
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+            {% else %}
+                <h2>Listagem de Usuários</h2>
+                <button><a href="/users/new">Novo usuário</a></button>
+                {% if not users %}
+                    <p>Ninguém cadastrado!</p>
+                {% else %}
+                    <table class="pure-table">
+                        <tr class="pure-table th">
+                            <th class="pure-table th"> LEITOR </th>
+                            <th class="pure-table th">_id: </th>
+                            <th class="pure-table th">Nome: </th>
+                            <th class="pure-table th">Id: </th>
+                            <th class="pure-table th">Address: </th>
+                            <th class="pure-table th">Phone Number: </th>
+                            <th class="pure-table th">e-mail: </th>
+                            <th class="pure-table th">Job: </th>
+                            <th class="pure-table th">Date of Birth: </th>
+                            <th class="pure-table th">Registration date: </th>
+                            <th class="pure-table th">Status: </th>
+                            <th class="pure-table th">Debtor: </th>
+                            <th class="pure-table th">Number of books: </th>
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                                <form action="/save_read" method="post">
+                                <td class="pure-table td"><button type="submit"> Leitor </button></td>
+                                <td class="pure-table td"><input type="hidden" name="user" value="{{ user._id }}">{{ user._id }}</td>
+                                <td class="pure-table td">{{ user.name }}</td>
+                                <td class="pure-table td">{{ user.iana_id }}</td>
+                                <td class="pure-table td">{{ user.address }}</td>
+                                <td class="pure-table td">{{ user.phone_number }}</td>
+                                <td class="pure-table td">{{ user.email }}</td>
+                                <td class="pure-table td">{{ user.job }}</td>
+                                <td class="pure-table td">{{ user.date }}</td>
+                                <td class="pure-table td">{{ user.date_in }}</td>
+                                <td class="pure-table td">{{ user.status }}</td>
+                                <td class="pure-table td">{{ user.debtor }}</td>
+                                <td class="pure-table td">{{ user.books|count }}</td>
+                                <input type="hidden" name="book" value="{{ book._id }}">
+                            </form>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% endif %}   
+    {% endblock %}
